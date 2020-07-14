@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuItem from './../../components/menu-item/menu-item.component';
-import sections from './../../constants/sections.json';
+import data from './../../constants/sections.json';
 
 import './directory.styles.scss';
 
@@ -8,6 +8,7 @@ class Directory extends React.Component {
 
     constructor() {
         super();
+        let sections = data.sections;
         this.state = { sections }
     }
 
