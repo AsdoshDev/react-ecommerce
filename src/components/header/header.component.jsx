@@ -28,6 +28,10 @@ const Header = ({ currentUser }) => (
 
             }
         </div>
+        {
+            currentUser ? <div>WELCOME {currentUser.displayName}</div> : ''
+        }
+
     </div>
 )
 
