@@ -6,34 +6,44 @@ import { ReactComponent as Logo } from './../../assets/crown.svg';
 
 import { auth } from './../../firebase/firebase.utils';
 
-const Header = ({ currentUser }) => (
-    <div className="header">
-        <Link className="logo-container" to='/'>
-            <Logo className="logo" />
-        </Link>
-        <div className="options">
-            <Link className="option" to='/shop'>
-                SHOP
-            </Link>
-            <Link className="option" to='/contact'>
-                CONTACT
-            </Link>
+import { connect } from 'react-redux';
+
+const Header = ({ currentUser }) => {
+    console.log(currentUser);
+    return (
+        <div className="header">
             {
-                currentUser ?
-                    <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
-                    :
-                    <Link className="option" to='/signin'>
-                        SIGN IN
+                currentUser && currentUser.currentUser ? <div className='welcome'>WELCOME <span style={{ 'fontWeight': 'bold' }}>{(currentUser.currentUser.displayName).toUpperCase()}!</span></div> : ''
+            }
+
+            <Link className="logo-container" to='/'>
+                <Logo className="logo" />
+            </Link>
+
+            <div className="options">
+                <Link className="option" to='/shop'>
+                    SHOP
+            </Link>
+                <Link className="option" to='/contact'>
+                    CONTACT
+            </Link>
+                {
+                    currentUser ?
+                        <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
+                        :
+                        <Link className="option" to='/signin'>
+                            SIGN IN
                     </Link>
 
-            }
+                }
+            </div>
         </div>
-        {
-            currentUser ? <div>WELCOME {currentUser.displayName}</div> : ''
-        }
+    )
+}
 
-    </div>
-)
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+})
 
 
-export default Header;
+export default connect(mapStateToProps)(Header);
