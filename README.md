@@ -1,3 +1,37 @@
+#Redux configuration
+
+1) Add provider component  in index.js and wrap it around the application (parent of everything in our application). 
+
+2) Pass the store to the provider as a param.
+
+3) Create a root reducer that combines all the reducers that we're gonna create.
+
+4) Create a user reducer that takes in two params => state and action. 
+    Assign initial state if required and then action will contain the payload.
+    return the state and the current User.
+
+    5) Create a store where you need to import createStore and applyMiddleware. 
+    ApplyMiddleware will take in middlewares which is an array of loggers.
+    createStore will take in root reducer and the applyMiddleware
+
+
+    6) Header component requires current User. So use mapStateToProps to retrieve the value from the store.
+
+    7) App.js needs to update the current user after login. So use mapDispatchToProps to update the store.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -9,17 +9,11 @@ import { auth } from './../../firebase/firebase.utils';
 import { connect } from 'react-redux';
 
 const Header = ({ currentUser }) => {
-    console.log(currentUser);
     return (
         <div className="header">
-            {
-                currentUser && currentUser.currentUser ? <div className='welcome'>WELCOME <span style={{ 'fontWeight': 'bold' }}>{(currentUser.currentUser.displayName).toUpperCase()}!</span></div> : ''
-            }
-
             <Link className="logo-container" to='/'>
                 <Logo className="logo" />
             </Link>
-
             <div className="options">
                 <Link className="option" to='/shop'>
                     SHOP
@@ -37,6 +31,10 @@ const Header = ({ currentUser }) => {
 
                 }
             </div>
+            {
+                currentUser && currentUser.currentUser ? <div className='welcome'>WELCOME <span style={{ 'fontWeight': 'bold' }}>{(currentUser.currentUser.displayName).toUpperCase()}!</span></div> : ''
+            }
+
         </div>
     )
 }
