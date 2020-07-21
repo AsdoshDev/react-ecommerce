@@ -16,7 +16,7 @@ const Cart = ({ cartItems, history, dispatch }) => (
                     cartItems.map(item => (
                         <CartItem key={item.id} item={item} />
                     ))
-                    : <span className="empty-cart">Your cart is empty</span>
+                    : <div className="empty-cart">Your cart is empty</div>
             }
         </div>
         <CustomButton onClick={() => {
