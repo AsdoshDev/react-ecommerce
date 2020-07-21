@@ -2,22 +2,15 @@ import React from 'react';
 import './cart.styles.scss';
 import CustomButton from './../custom-button/custom-button.component';
 import { connect } from 'react-redux';
+import CartItem from './../cart-item/cart-item.component';
 
-const Cart = cartItems => (
+const Cart = ({ cartItems }) => (
     <div className="cart">
         <div className="cart-items">
             {
-                cartItems && cartItems.length > 0
-                    ?
-                    cartItems.map(item => (
-                        <div className="cart-item">
-                            <img alt='' src={item.imageUrl} />
-                            <span>{item.name}</span>
-                            <span>{item.price}</span>
-                        </div>
-                    ))
-                    :
-                    null
+                cartItems.map(item => (
+                    <CartItem key={item.id} item={item} />
+                ))
             }
         </div>
         <CustomButton>GO TO CHECKOUT</CustomButton>
