@@ -20,6 +20,24 @@
     7) App.js needs to update the current user after login. So use mapDispatchToProps to update the store.
 
 
+    LOCAL STORAGE
+
+    8) Install redux-persist.
+
+    9) Import persistStore and pass existing store as parameter to persistStore. (store.js)
+
+    10) Import persistReducer from redux-persist and storage.
+
+    Wrap the rootReducer by passing it as a second param for persistReducer and export it.
+    First param would be a config hat contains three things :
+    1) key -> store from where
+    2) type of storage used -> storage
+    3) all the reducers required to be stored.
+
+    11) Index.js -> Wrap the App component with PersistGate and pass the persistor created in store.js
+
+
+
 
 
 
