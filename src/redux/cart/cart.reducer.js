@@ -3,13 +3,20 @@ import addItemToCart from './cart.utils';
 import { deleteItemFromCart } from './cart.utils';
 import { removeItemFromCart } from './cart.utils';
 
-
 const INITIAL_STATE = {
     hidden: true,
     cartItems: []
 }
 
+/**
+ * 
+ * @param {Object} state 
+ * @param {Object} action 
+ */
+
 const CartReducer = (state = INITIAL_STATE, action) => {
+
+    console.log("hello");
 
     switch (action.type) {
         case CartActionTypes.TOGGLE_CART:

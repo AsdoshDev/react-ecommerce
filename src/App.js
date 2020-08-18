@@ -11,10 +11,12 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+// import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
+//addCollectionAndDocs
 
 class App extends React.Component {
-
   componentDidMount() {
+    //, collectionsArray
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -30,15 +32,12 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      // addCollectionAndDocs('collections', collectionsArray.map(({ title, items }) => ({ title, items })));
     })
   }
-
-
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
-
-
   // for shop , its not exact because we have another routes starting with /shop unlike others.
   render() {
     return (
@@ -53,13 +52,12 @@ class App extends React.Component {
       </div>
     );
   }
-
 }
-
+/* get data to be used by the component */
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionsForPreview
 })
-
 const mapDispatchToProps = dispatch => (
   {
     setCurrentUser: user => dispatch(setCurrentUser(user))

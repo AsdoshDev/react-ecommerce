@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param {[]} cartItems 
+ * @param {Object} cartItemToAdd 
+ */
+
 const addItemToCart = (cartItems, cartItemToAdd) => {
     const existingItem = cartItems.find(item => cartItemToAdd.id === item.id);
     if (existingItem) {
@@ -10,9 +16,21 @@ const addItemToCart = (cartItems, cartItemToAdd) => {
     return [...cartItems, { ...cartItemToAdd, quantity: 1 }]
 }
 
+/**
+ * 
+ * @param {[]} cartItems 
+ * @param {Object} cartItemToDelete 
+ */
+
 const deleteItemFromCart = (cartItems, cartItemToDelete) => {
     return cartItems.filter(item => item.id !== cartItemToDelete.id);
 }
+
+/**
+ * 
+ * @param {[]} cartItems 
+ * @param {Object} cartItemToRemove 
+ */
 
 const removeItemFromCart = (cartItems, cartItemToRemove) => {
     let toBeRemovedIndex = cartItems.findIndex(item => item.id === cartItemToRemove.id);

@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './header.styles.scss';
 import { ReactComponent as Logo } from './../../assets/crown.svg';
 import { auth } from './../../firebase/firebase.utils';
 import { connect } from 'react-redux';
@@ -9,38 +7,45 @@ import Cart from './../cart/cart.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
-
-
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink, WelcomeContainer } from './header.styles';
 
 const Header = ({ currentUser, hidden }) => {
     return (
-        <div className="header">
-            <Link className="logo-container" to='/'>
+        <HeaderContainer>
+            <LogoContainer to='/'>
                 <Logo className="logo" />
-            </Link>
-            <div className="options">
-                <Link className="option" to='/shop'>
+            </LogoContainer>
+            <OptionsContainer>
+                <OptionLink to='/shop'>
                     SHOP
-            </Link>
-                <Link className="option" to='/contact'>
+                </OptionLink>
+                <OptionLink to='/contact'>
                     CONTACT
-            </Link>
+                </OptionLink>
                 {
                     currentUser ?
-                        <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
+                        <OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
                         :
-                        <Link className="option" to='/signin'>
+                        <OptionLink to='/signin'>
                             SIGN IN
-                    </Link>
+                        </OptionLink>
 
                 }
                 <CartIcon />
-            </div>
+            </OptionsContainer>
             {hidden ? null : (<Cart />)}
             {
-                currentUser && currentUser.currentUser ? <div className='welcome'>WELCOME <span style={{ 'fontWeight': 'bold' }}>{(currentUser.currentUser.displayName).toUpperCase()}!</span></div> : ''
+                currentUser && currentUser.currentUser
+                    ?
+                    <WelcomeContainer>
+                        WELCOME
+                    <span style={{ 'fontWeight': 'bold' }}>
+                            {` ${(currentUser.currentUser.displayName).toUpperCase()}`}!
+                    </span>
+                    </WelcomeContainer>
+                    : ''
             }
-        </div>
+        </HeaderContainer>
     )
 }
 

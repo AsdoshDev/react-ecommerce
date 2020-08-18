@@ -13,10 +13,7 @@ const config = {
     measurementId: "G-SKW146B0JF"
 };
 
-
 firebase.initializeApp(config);
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
@@ -47,3 +44,39 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
     return usrRef;
 }
+
+
+export const addCollectionAndDocs = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    console.log(collectionRef);
+
+    const batch = firestore.batch();
+
+    objectsToAdd.forEach(obj => {
+        const docRef = collectionRef.doc();
+        batch.set(docRef, obj);
+    })
+
+    await batch.commit();
+}
+
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { title, items } = doc.data();
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            items,
+            title
+        }
+    });
+
+    return transformedCollection.reduce((acc, item) => {
+        acc[item.title.toLowerCase()] = item;
+        return acc;
+    }, {});
+}
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
