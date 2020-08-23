@@ -15,9 +15,6 @@ const INITIAL_STATE = {
  */
 
 const CartReducer = (state = INITIAL_STATE, action) => {
-
-    console.log("hello");
-
     switch (action.type) {
         case CartActionTypes.TOGGLE_CART:
             return {

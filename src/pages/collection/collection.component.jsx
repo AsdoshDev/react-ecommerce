@@ -9,6 +9,7 @@ import {
 } from './collection.styles';
 
 const CollectionPage = ({ match, collection }) => {
+    console.log("CollectionPage -> collection", collection)
     const { title, items } = collection;
     return (
         <CollectionPageWrapper>
